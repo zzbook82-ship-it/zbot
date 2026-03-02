@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إرسال رسالة إلى بوت Telegram</title>
+</head>
+<body>
+    <h2>أرسل رسالة إلى بوت Telegram</h2>
+    <input type="text" id="message" placeholder="اكتب رسالتك هنا">
+    <button onclick="sendMessage()">إرسال</button>
+
+    <script>
+        function sendMessage() {
+            var text = document.getElementById("message").value;
+
+            var token = "8692285323:AAH5Mwxbw9QuthTiG3Z-1rmOGux7Zv3Jwyg";  // هنا ضع التوكن الخاص بالبوت
+            var chat_id = "YOUR_CHAT_ID";  // هنا ضع الـ chat ID الذي تريد إرسال الرسالة إليه
+
+            fetch("https://api.telegram.org/bot" + token + "/sendMessage", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    chat_id: chat_id,
+                    text: text
+                })
+            })
+            .then(response => response.json())
+            .then(data => alert("تم إرسال الرسالة"))
+            .catch(error => alert("حدث خطأ"));
+        }
+    </script>
+</body>
+</html>
